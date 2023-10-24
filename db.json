@@ -1,3 +1,7 @@
 {
-  "contact_data": []
+  "contact_data": [
+    {
+      "id": 1
+    }
+  ]
 }

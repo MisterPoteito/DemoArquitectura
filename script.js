@@ -3,20 +3,23 @@ document.getElementById("contactForm").addEventListener("submit", function(event
 
     const formData = new FormData(this);
 
-    //el siguiente fetch envía los datos al servidor de json levantado localmente
+    // El siguiente forEach convierte el objeto formData en un objeto de JavaScript
+    const formDataObject = {};
+    formData.forEach((value, key) => {
+        formDataObject[key] = value;
+    });
+
+    // El siguiente fetch envía los datos al servidor local
     fetch("http://localhost:3000/contact_data", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-})
-    //el siguiente then recibe la respuesta del servidor y la muestra en el html
-.then(response => response.json())
-.then(data => {
-    const messageElement = document.getElementById("message");
-    messageElement.textContent = data.message;
-    console.log(JSON.stringify(formData));
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formDataObject)
+    })
+    .then(response => response.json())
+    .then(data => {
+        const messageElement = document.getElementById("message");
+        messageElement.textContent = data.message;
+    });
 });
-}
-);
