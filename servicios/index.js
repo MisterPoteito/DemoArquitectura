@@ -3,14 +3,14 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 4003;
+const port = process.env.PORT || 4004;
 //middlewares
 app.use(bodyParser.json());
 app.use(cors());
 //routes
-const authRouter = require("./routes/authRouter");
+const serviciosRouter = require("./routes/serviciosRouter");
 
-app.use("/api/v1/usuario", authRouter);
+app.use("/api/v1/servicios", serviciosRouter);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

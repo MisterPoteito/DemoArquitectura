@@ -25,7 +25,14 @@ const listarPresupuesto = async (req, res) => {
   return res.status(200).send({ presupuestos });
 };
 
+const eliminaPresupuesto = async (req, res) => {
+  const { id } = req.body;
+  const presupuestoEliminado = await presupuestoModelo.eliminaPresupuesto(id);
+  return res.status(200).send(presupuestoEliminado);
+};
+
 module.exports = {
   listarPresupuesto,
   ingresaPresupuesto,
+  eliminaPresupuesto,
 };

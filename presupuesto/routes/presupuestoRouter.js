@@ -8,5 +8,6 @@ router.get("/test", (req, res) => {
 });
 router.get("/", presupuestoController.listarPresupuesto);
 router.post("/genera", presupuestoController.ingresaPresupuesto);
+router.delete("/", presupuestoController.eliminaPresupuesto);
 
 module.exports = router;

@@ -1,9 +1,10 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, ButtonGroup, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
+import axios from "axios";
 
 const columns = [
   {
@@ -60,7 +61,7 @@ const columns = [
     ),
   },
 ];
-
+/* 
 const rows = [
   {
     id: 1,
@@ -100,9 +101,19 @@ const rows = [
     fecha_solicitud: "2023-10-20",
     fecha_programada: "2023-11-02",
   },
-];
+]; */
 
 export default function DataGridServicios() {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const url = `http://localhost:4004/api/v1/servicios`;
+    axios
+      .get(url)
+      .then((response) => setRows(response.data))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <Box sx={{ height: 400, width: "100%" }}>
       <DataGrid

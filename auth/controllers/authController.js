@@ -31,12 +31,18 @@ const login = async (req, res) => {
   const { username, password } = req.body;
 
   const resultado = await authModelo.consultaUsuarioPorUsername(username);
+
+  if (!resultado) {
+    return res.status(400).send({ error: "Usiario o password incorrectos." });
+  }
   const { password: passEncriptada, nombres } = resultado;
 
   const matchPass = await bcrypt.compare(password, passEncriptada);
 
   if (matchPass) {
     const token = jwt.sign({ username, nombres }, process.env.SECRET_JWT);
+
+    console.log("Token Generado: ", token);
     return res.status(200).send({ token });
   }
 

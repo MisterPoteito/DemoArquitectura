@@ -19,7 +19,7 @@ const registraUsuario = async (username, password, nombres) => {
     password,
     nombres,
   ]);
-
+  console.log("LLAMADA MICROSERVICIO AUTH: ", "Se han registrado un usuario.");
   return JSON.parse(JSON.stringify(resultado.rows));
 };
 
@@ -28,7 +28,10 @@ const consultaUsuarioPorUsername = async (username) => {
 
   var pgClient = await bd.connection();
   const { rows, fields } = await pgClient.query(queryString, [username]);
-
+  console.log(
+    "LLAMADA MICROSERVICIO AUTH: ",
+    "Un usuario ha solicitado iniciar sesion."
+  );
   return rows[0];
 };
 
